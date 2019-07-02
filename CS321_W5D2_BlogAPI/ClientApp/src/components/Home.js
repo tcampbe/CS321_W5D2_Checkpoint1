@@ -28,10 +28,10 @@ export class Home extends Component {
   componentDidMount() {
     apiCall('/api/blogs', {
       method: 'GET'
-    }).then((blogs, apiInfo) => {
+    }).then(res => {
       this.setState({
-        blogs,
-        apiInfo
+        blogs: res.data,
+        apiInfo: res
       });
     });
   }

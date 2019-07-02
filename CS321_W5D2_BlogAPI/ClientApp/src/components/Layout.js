@@ -6,9 +6,10 @@ export class Layout extends Component {
   static displayName = Layout.name;
 
   render () {
+    const { loggedIn, logOut } = this.props;
     return (
       <div>
-        <NavMenu />
+        <NavMenu loggedIn={loggedIn} logOut={logOut}/>
         <Container>
           {this.props.children}
         </Container>

@@ -17,9 +17,8 @@ export class Login extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(loginModel),
-    }).then((data) => {
-      localStorage.setItem('token', data.token);
-      console.log('login', data);
+    }).then((res) => {
+      localStorage.setItem('token', res.data.token);
     });
   };
 

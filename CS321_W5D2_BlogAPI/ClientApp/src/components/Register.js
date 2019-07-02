@@ -17,8 +17,8 @@ export class Register extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(registrationModel),
-    }).then((user) => {
-        console.log('registration', user);
+    }).then((res) => {
+        console.log('registration', res.data);
     });
   };
 

@@ -1,33 +1,35 @@
 ﻿import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { apiCall } from '../apiUtils';
-import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap';
+import { ApiInfo } from './ApiInfo';
 
 export class Post extends Component {
   static displayName = Post.name;
 
   state = {
     post: {},
-    comments: []
+    comments: [],
+    apiInfo: {}
   };
 
   componentDidMount() {
     const { blogId, postId } = this.props.match.params;
     apiCall(`/api/blogs/${blogId}/posts/${postId}`)
-    .then((post) => {
+    .then((res) => {
       this.setState({
-        post: post
+        post: res.data,
+        apiInfo: res
       });
     });
   }
 
   render() {
-    const { post, comments } = this.state;
+    const { post, comments, apiInfo } = this.state;
     console.log('post render');
     return (
       <React.Fragment>
         <h1>{post.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        <ApiInfo apiInfo={apiInfo}/>
       </React.Fragment>
     );
   }

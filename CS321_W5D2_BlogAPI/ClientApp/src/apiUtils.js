@@ -1,16 +1,23 @@
 export function apiCall(route, options = {}) {
   var token = localStorage.getItem('token');
-  console.log(options);
   options = {
     ...options,
     headers: {
       ...options.headers,
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token,
+      Authorization: 'Bearer ' + token,
     },
   };
-  console.log(options);
-  return fetch(route, options).then((res) => {
-    return res.json();
-  });
+  const apiInfo = {
+    route: route,
+    options: options,
+  };
+  return fetch(route, options)
+    .then((res) => res.json())
+    .then((data) => {
+      return Promise.resolve({
+        data: data,
+        ...apiInfo
+      });
+    });
 }
