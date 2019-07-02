@@ -6,6 +6,8 @@ import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { Blog } from './components/Blog';
 import { Post } from './components/Post';
+import { Register } from './components/Register';
+import { Login } from './components/Login';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -18,6 +20,8 @@ export default class App extends Component {
         <Route path='/fetch-data' component={FetchData} />
         <Route exact path='/blog/:blogId/post/:postId' component={Post} />
         <Route exact path='/blog/:blogId' component={Blog} />
+        <Route exact path='/register' component={Register} />
+        <Route exact path='/login' component={Login} />
       </Layout>
     );
   }
