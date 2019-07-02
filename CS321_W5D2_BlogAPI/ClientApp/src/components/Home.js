@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { apiCall } from '../apiUtils';
+import { ApiInfo } from './ApiInfo';
 import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap';
 
 const BlogCard = (props) => {
@@ -21,23 +22,28 @@ export class Home extends Component {
 
   state = {
     blogs: [],
+    apiInfo: {}
   };
 
   componentDidMount() {
-    apiCall('/api/blogs').then((blogs) => {
+    apiCall('/api/blogs', {
+      method: 'GET'
+    }).then((blogs, apiInfo) => {
       this.setState({
-        blogs: blogs,
+        blogs,
+        apiInfo
       });
     });
   }
 
   render() {
-    const { blogs } = this.state;
+    const { blogs, apiInfo } = this.state;
     return (
       <React.Fragment>
         {blogs.map((b, i) => (
           <BlogCard blog={b} key={i} />
         ))}
+        <ApiInfo apiInfo={apiInfo} />
       </React.Fragment>
     );
   }

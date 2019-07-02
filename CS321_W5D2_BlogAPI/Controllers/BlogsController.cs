@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CS321_W5D2_BlogAPI.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CS321_W5D2_BlogAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class BlogsController : Controller
     {
@@ -27,6 +29,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
                     Description = "Just what it says."
                 }
         };
+
         // GET: api/values
         [HttpGet]
         public IEnumerable<Blog> Get()

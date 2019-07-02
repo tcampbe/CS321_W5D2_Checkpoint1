@@ -27,7 +27,9 @@ export class Blog extends Component {
 
   componentDidMount() {
     const { blogId } = this.props.match.params;
-    apiCall(`/api/blogs/${blogId}`)
+    apiCall(`/api/blogs/${blogId}`, {
+      method: 'GET'
+    })
       .then((blog) => {
         console.log(blog);
         this.setState({

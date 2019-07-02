@@ -78,6 +78,8 @@ namespace CS321_W5D2_BlogAPI
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
