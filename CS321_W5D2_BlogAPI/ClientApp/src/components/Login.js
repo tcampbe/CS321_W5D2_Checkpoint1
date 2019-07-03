@@ -1,26 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { apiCall } from '../apiUtils';
+import { withRouter } from 'react-router-dom'
 
-export class Login extends React.Component {
+class Login extends React.Component {
   state = {
     loginModel: {},
   };
 
-  handleClick = (e) => {
-    const { loginModel } = this.state;
-    console.log('loginmodel', loginModel);
-    e.preventDefault();
-    apiCall(`/api/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(loginModel),
-    }).then((res) => {
-      localStorage.setItem('token', res.data.token);
-    });
-  };
+  handleClick = () => {
+    const { logIn } = this.props;
+    var loginModel = { ...this.state.loginModel };
+    logIn(loginModel);
+  }
 
   handleChange = (e) => {
     var loginModel = { ...this.state.loginModel };
@@ -51,9 +43,12 @@ export class Login extends React.Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <Button onClick={this.handleClick}>Login</Button>
-        <Button>Cancel</Button>
+        <Button onClick={this.handleClick}>Login</Button>{' '}
+        <Button tag={Link} to="/">Cancel</Button>
+        <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
       </Form>
     );
   }
 }
+
+export default withRouter(Login);

@@ -12,8 +12,10 @@ export class ApiInfo extends Component {
       <Card>
         <CardBody>
           <CardTitle>API Call Info</CardTitle>
+          <CardSubtitle style={{ color: apiInfo.status >= 400 ? 'red' : 'green' }}>{apiInfo.status}{' '}{apiInfo.statusText}</CardSubtitle>
+          <CardText></CardText>
           <CardSubtitle>Route</CardSubtitle>
-          <CardText>{apiInfo.route}</CardText>
+          <CardText>{apiInfo.options ? apiInfo.options.method : 'GET'}{' '}{apiInfo.route}</CardText>
           <CardSubtitle>Headers</CardSubtitle>
           {apiInfo.options && apiInfo.options.headers
             ? Object.keys(apiInfo.options.headers).map((k, i) => (

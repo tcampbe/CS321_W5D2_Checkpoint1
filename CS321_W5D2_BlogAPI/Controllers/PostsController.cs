@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CS321_W5D2_BlogAPI.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CS321_W5D2_BlogAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class PostsController : Controller
     {
@@ -54,35 +56,40 @@ namespace CS321_W5D2_BlogAPI.Controllers
             },
         };
         // GET: api/values
+        [AllowAnonymous]
         [HttpGet("/api/blogs/{blogId}/posts")]
-        public IEnumerable<Post> Get(int blogId)
+        public IActionResult Get(int blogId)
         {
-            return _posts.Where(p => p.BlogId == blogId).ToList();
+            return Ok(_posts.Where(p => p.BlogId == blogId).ToList());
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         [HttpGet("/api/blogs/{blogId}/posts/{postId}")]
-        public Post Get(int blogId, int postId)
+        public IActionResult Get(int blogId, int postId)
         {
-            return _posts.SingleOrDefault(p => p.Id == postId);
+            return Ok(_posts.SingleOrDefault(p => p.Id == postId));
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]string value)
         {
+            return Ok();
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]string value)
         {
+            return Ok();
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("/api/blogs/{blogId}/posts/{postId}")]
+        public IActionResult Delete(int id)
         {
+            return Ok();
         }
     }
 }

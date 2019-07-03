@@ -23,8 +23,7 @@ export class Post extends Component {
   }
 
   render() {
-    const { post, comments, apiInfo } = this.state;
-    console.log('post render');
+    const { post, apiInfo } = this.state;
     return (
       <React.Fragment>
         <h1>{post.title}</h1>

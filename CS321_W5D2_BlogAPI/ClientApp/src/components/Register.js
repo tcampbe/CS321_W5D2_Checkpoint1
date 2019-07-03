@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { apiCall } from '../apiUtils';
 
@@ -9,17 +10,9 @@ export class Register extends React.Component {
 
   handleClick = (e) => {
     const { registrationModel } = this.state;
-    console.log('regmodel', registrationModel);
     e.preventDefault();
-    apiCall(`/api/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(registrationModel),
-    }).then((res) => {
-        console.log('registration', res.data);
-    });
+    const { register } = this.props;
+    register(registrationModel);
   };
 
   handleChange = (e) => {
@@ -71,8 +64,8 @@ export class Register extends React.Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <Button onClick={this.handleClick}>Register</Button>
-        <Button>Cancel</Button>
+        <Button onClick={this.handleClick}>Register</Button>{' '}
+        <Button tag={Link} to="/">Cancel</Button>
       </Form>
     );
   }

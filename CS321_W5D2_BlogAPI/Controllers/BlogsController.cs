@@ -31,6 +31,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
         };
 
         // GET: api/values
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Blog> Get()
         {
@@ -38,6 +39,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public Blog Get(int id)
         {

@@ -1,15 +1,16 @@
 import './App.css'
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { Blog } from './components/Blog';
 import { Post } from './components/Post';
 import { Register } from './components/Register';
-import { Login } from './components/Login';
+import Login from './components/Login';
 import { apiCall } from './apiUtils';
 
-export default class App extends Component {
+class App extends Component {
   static displayName = App.name;
 
   state = {
@@ -17,6 +18,8 @@ export default class App extends Component {
   }
 
   logIn = (loginModel) => {
+    console.log('logIn');
+    const { history } = this.props;
     apiCall(`/api/auth/login`, {
       method: 'POST',
       headers: {
@@ -28,6 +31,7 @@ export default class App extends Component {
       this.setState({
         loggedIn: true
       });
+      history.push('/');
     });
   }
 
@@ -38,8 +42,17 @@ export default class App extends Component {
     });
   }
 
-  register = () => {
-
+  register = (registrationModel) => {
+    const { history } = this.props;
+    apiCall(`/api/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(registrationModel),
+    }).then((res) => {
+      history.push('/login');
+    });
   }
 
   componentDidMount() {
@@ -71,14 +84,15 @@ export default class App extends Component {
         <Route
           exact
           path="/register"
-          component={Register}
+          component={() => <Register register={this.register} />}
         />
         <Route
           exact
           path="/login"
-          component={Login}
+          component={() => <Login logIn={this.logIn}/>}
         />
       </Layout>
     );
   }
 }
+export default withRouter(App);
