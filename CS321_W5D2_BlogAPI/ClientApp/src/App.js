@@ -11,6 +11,7 @@ import Login from './components/Login';
 import { apiCall } from './apiUtils';
 import { LoginInfo } from './components/LoginInfo';
 import NewPost from './components/NewPost';
+import TokenHelper from './tokenHelper';
 
 class App extends Component {
   static displayName = App.name;
@@ -30,7 +31,8 @@ class App extends Component {
       },
       body: JSON.stringify(loginModel),
     }).then((res) => {
-      localStorage.setItem('token', res.data.token);
+      //localStorage.setItem('blogToken', res.data);
+      TokenHelper.setToken(res.data);
       this.setState({
         loggedIn: true,
         email: res.data.email
@@ -40,7 +42,7 @@ class App extends Component {
   }
 
   logOut = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('blogToken');
     this.setState({
       loggedIn: false
     });
@@ -60,9 +62,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const token = localStorage.getItem('token');
+    //const blogToken = localStorage.getItem('blogToken');
+    const blogToken = TokenHelper.getToken();
+    console.log(blogToken);
     this.setState({
-      loggedIn: !!token
+      loggedIn: !!blogToken,
+      email: blogToken ? blogToken.email : null
     });
   }
 

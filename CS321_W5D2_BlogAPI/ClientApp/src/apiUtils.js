@@ -1,5 +1,8 @@
+import TokenHelper from './tokenHelper';
+
 export function apiCall(route, options = {}) {
-  var token = localStorage.getItem('token');
+  //var blogToken = localStorage.getItem('blogToken');
+  var blogToken = TokenHelper.getToken();
   options = {
     method: 'GET',
     ...options,
@@ -8,8 +11,8 @@ export function apiCall(route, options = {}) {
       'Content-Type': 'application/json'
     },
   };
-  if (token) {
-    options.headers.Authorization = 'Bearer ' + token;
+  if (blogToken) {
+    options.headers.Authorization = 'Bearer ' + blogToken.token;
   }
   const apiInfo = {
     route: route,
