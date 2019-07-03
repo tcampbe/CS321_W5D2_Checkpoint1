@@ -1,5 +1,6 @@
 using System.Text;
 using CS321_W5D2_BlogAPI.Core.Models;
+using CS321_W5D2_BlogAPI.Core.Services;
 using CS321_W5D2_BlogAPI.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -57,6 +58,11 @@ namespace CS321_W5D2_BlogAPI
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
+
+            services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IBlogService, BlogService>();
+            services.AddScoped<IPostService, PostService>();
 
         }
 

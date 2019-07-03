@@ -1,7 +1,7 @@
 ﻿using System;
 namespace CS321_W5D2_BlogAPI.Core.Models
 {
-    public class Comment
+    public class Comment : IEntity<int>
     {
         public int Id { get; set; }
         public string Title { get; set; }

@@ -1,39 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CS321_W5D2_BlogAPI.Core.Models;
 using CS321_W5D2_BlogAPI.Core.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace CS321_W5D2_BlogAPI.Infrastructure.Data
 {
-    public class PostRepository : IPostRepository
+    public class PostRepository : Repository<Post, int>, IPostRepository
     {
-        public PostRepository()
-        {
+        public PostRepository(AppDbContext dbContext) : base(dbContext)
+        {  
         }
 
-        public Post Add(Post Post)
+        public override Post Get(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Posts
+                .Include(p => p.Blog)
+                .SingleOrDefault(p => p.Id == id);
         }
 
-        public Post Get(int id)
+        public IEnumerable<Post> GetBlogPosts(int blogId)
         {
-            throw new NotImplementedException();
+            return _dbContext.Posts
+                .Include(p => p.Blog)
+                .Where(p => p.BlogId == blogId)
+                .ToList();
         }
 
-        public IEnumerable<Post> GetAll()
+        public IEnumerable<Comment> GetPostComments(int postId)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Post Update(Post Post)
-        {
-            throw new NotImplementedException();
+            return _dbContext.Comments
+                .Where(c => c.PostId == postId)
+                .ToList();
         }
     }
 }

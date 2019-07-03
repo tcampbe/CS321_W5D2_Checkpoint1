@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CS321_W5D2_BlogAPI.Core.Models;
+using CS321_W5D2_BlogAPI.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,28 +15,19 @@ namespace CS321_W5D2_BlogAPI.Controllers
     [Route("api/[controller]")]
     public class BlogsController : Controller
     {
-        private List<Blog> _blogs = new List<Blog>
+        private readonly IBlogService _blogService;
+
+        public BlogsController(IBlogService blogService)
         {
-                new Blog
-                {
-                    Id = 1,
-                    Name = "Yada, Yada, Yada",
-                    Description = "A blog about nothing.",
-                },
-                new Blog
-                {
-                    Id = 2,
-                    Name = "Random Nonsense",
-                    Description = "Just what it says."
-                }
-        };
+            _blogService = blogService;
+        }
 
         // GET: api/values
         [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Blog> Get()
         {
-            return _blogs;
+            return _blogService.GetAll();
         }
 
         // GET api/values/5
@@ -43,25 +35,28 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpGet("{id}")]
         public Blog Get(int id)
         {
-            return _blogs.SingleOrDefault(b => b.Id == id);
+            return _blogService.Get(id);
         }
 
         // POST api/values
         [HttpPost]
         public void Post([FromBody]Blog blog)
         {
+            _blogService.Add(blog);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]Blog blog)
         {
+            _blogService.Update(blog);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _blogService.Remove(id);
         }
     }
 }

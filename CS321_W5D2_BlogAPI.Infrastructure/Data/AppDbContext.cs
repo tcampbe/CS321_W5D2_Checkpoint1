@@ -15,6 +15,8 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {
             base.OnModelCreating(builder);
 
+            //builder.Entity<Blog>().HasData();
+
             //builder.Entity<ActivityType>().HasData(
             //    new ActivityType { Id = 1, Name = "Running", RecordType = RecordType.DurationAndDistance },
             //    new ActivityType { Id = 2, Name = "Weights", RecordType = RecordType.DurationOnly },

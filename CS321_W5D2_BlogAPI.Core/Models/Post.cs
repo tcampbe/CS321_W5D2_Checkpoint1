@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CS321_W5D2_BlogAPI.Core.Models
 {
-    public class Post
+    public class Post : IEntity<int>
     {
         public int Id { get; set; }
         public string Title { get; set; }

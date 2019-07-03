@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CS321_W5D2_BlogAPI.Core.Models
 {
-    public class Blog
+    public class Blog : IEntity<int>
     {
         public int Id { get; set; }
         public string Name { get; set; }

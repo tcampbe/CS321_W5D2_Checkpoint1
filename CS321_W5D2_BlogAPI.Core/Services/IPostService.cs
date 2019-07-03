@@ -4,12 +4,12 @@ using CS321_W5D2_BlogAPI.Core.Models;
 
 namespace CS321_W5D2_BlogAPI.Core.Services
 {
-    public interface IBlogService
+    public interface IPostService
     {
-        Blog Add(Blog newBlog);
-        Blog Update(Blog updatedBlog);
-        Blog Get(int id);
-        IEnumerable<Blog> GetAll();
+        Post Add(Post newPost);
+        Post Update(Post updatedPost);
+        Post Get(int id);
+        IEnumerable<Post> GetAll();
         void Remove(int id);
     }
 }

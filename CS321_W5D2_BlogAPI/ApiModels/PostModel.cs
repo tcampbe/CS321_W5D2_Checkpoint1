@@ -9,5 +9,7 @@ namespace CS321_W5D2_BlogAPI.ApiModels
         public bool CommentsAllowed { get; set; }
         public DateTime DatePublished { get; set; }
         public int BlogId { get; set; }
+        public string BlogName { get; set; }
+        public string AuthorName { get; set; }
     }
 }

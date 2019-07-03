@@ -62,7 +62,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpGet("/api/blogs/{blogId}/posts")]
         public IActionResult Get(int blogId)
         {
-            return Ok(_posts.Where(p => p.BlogId == blogId).ToList());
+            return Ok(_posts.Where(p => p.BlogId == blogId).ToList().ToApiModels());
         }
 
         // GET api/blogs/{blogId}/posts/{postId}
@@ -70,7 +70,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpGet("/api/blogs/{blogId}/posts/{postId}")]
         public IActionResult Get(int blogId, int postId)
         {
-            return Ok(_posts.SingleOrDefault(p => p.Id == postId));
+            return Ok(_posts.SingleOrDefault(p => p.Id == postId).ToApiModel());
         }
 
         // POST /api/blogs/{blogId}/post
