@@ -27,6 +27,11 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         {
             return _postRepository.GetAll();
         }
+        
+        public IEnumerable<Post> GetBlogPosts(int blogId)
+        {
+            return _postRepository.GetBlogPosts(blogId);
+        }
 
         public void Remove(int id)
         {

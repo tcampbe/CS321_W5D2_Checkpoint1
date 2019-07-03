@@ -22,6 +22,7 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         public virtual T Add(T entity)
         {
             _dbSet.Add(entity);
+            _dbContext.SaveChanges();
             return entity;
         }
 
@@ -43,6 +44,7 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
                .CurrentValues
                .SetValues(updatedItem);
             _dbSet.Update(existingItem);
+            _dbContext.SaveChanges();
             return existingItem;
         }
 
@@ -55,6 +57,7 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         public virtual void Remove(T entity)
         {
             _dbSet.Remove(entity);
+            _dbContext.SaveChanges();
         }
     }
 }

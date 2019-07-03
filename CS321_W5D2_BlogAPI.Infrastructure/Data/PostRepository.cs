@@ -17,6 +17,7 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {
             return _dbContext.Posts
                 .Include(p => p.Blog)
+                .ThenInclude(b => b.User)
                 .SingleOrDefault(p => p.Id == id);
         }
 
@@ -24,6 +25,7 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {
             return _dbContext.Posts
                 .Include(p => p.Blog)
+                .ThenInclude(b => b.User)
                 .Where(p => p.BlogId == blogId)
                 .ToList();
         }

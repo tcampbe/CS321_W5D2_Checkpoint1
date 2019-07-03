@@ -11,14 +11,14 @@ const PostCard = (props) => {
     <Card>
       <CardBody>
         <CardTitle>{post.title}</CardTitle>
-        <CardSubtitle>{post.datePublished.substring(0, 10)}</CardSubtitle>
+        <CardSubtitle>by {post.authorName}{' '}{post.datePublished.substring(0, 10)}</CardSubtitle>
         <Button tag={Link} to={`/blog/${post.blogId}/post/${post.id}`}>
           Read More...
         </Button>{' '}
         <Button onClick={onDeleteClick}>Delete</Button>
       </CardBody>
       <CardBody
-        style={{ overflow: 'hidden', textOverflow: 'ellipsis', height: 50 }}
+        style={{ overflow: 'hidden', textOverflow: 'ellipsis', height: 80 }}
       >
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
       </CardBody>

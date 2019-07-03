@@ -10,6 +10,7 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         Post Update(Post updatedPost);
         Post Get(int id);
         IEnumerable<Post> GetAll();
+        IEnumerable<Post> GetBlogPosts(int blogId);
         void Remove(int id);
     }
 }
