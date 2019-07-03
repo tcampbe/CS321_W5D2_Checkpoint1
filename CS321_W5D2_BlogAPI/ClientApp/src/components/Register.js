@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { apiCall } from '../apiUtils';
 
 export class Register extends React.Component {
   state = {

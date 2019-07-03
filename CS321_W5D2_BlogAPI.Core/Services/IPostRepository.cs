@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using CS321_W5D2_BlogAPI.Core.Models;
 
-namespace CS321_W5D2_PostAPI.Core.Services
+namespace CS321_W5D2_BlogAPI.Core.Services
 {
     public interface IPostRepository
     {

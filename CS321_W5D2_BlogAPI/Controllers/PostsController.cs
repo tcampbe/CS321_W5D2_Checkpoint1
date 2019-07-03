@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CS321_W5D2_BlogAPI.Core.Models;
+using CS321_W5D2_BlogAPI.ApiModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +25,8 @@ namespace CS321_W5D2_BlogAPI.Controllers
                             Taciti vel at suscipit accumsan mi interdum ipsum tristique. Penatibus blandit placerat a dui eleifend porta gravida eros per dis convallis natoque. Turpis fermentum litora gravida pretium. Eleifend litora sollicitudin pulvinar sagittis, accumsan molestie ridiculus malesuada. Dictumst neque eu consectetur sociis eget, curae; eu ornare.Bibendum, class interdum id eros sagittis nisi ut leo.Duis mollis risus curabitur nulla ridiculus potenti congue ad semper fringilla interdum mollis! Convallis proin aptent, velit arcu gravida.Quisque suscipit vulputate integer? Magnis.
                             </p>";
 
-        private List<Post> _posts = new List<Post> {
+        private static int _nextId = 10;
+        private static List<Post> _posts = new List<Post> {
             new Post
             {
                 Id = 1,
@@ -55,7 +57,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
                 CommentsAllowed = true
             },
         };
-        // GET: api/values
+        // GET /api/blogs/{blogId}/posts
         [AllowAnonymous]
         [HttpGet("/api/blogs/{blogId}/posts")]
         public IActionResult Get(int blogId)
@@ -63,7 +65,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
             return Ok(_posts.Where(p => p.BlogId == blogId).ToList());
         }
 
-        // GET api/values/5
+        // GET api/blogs/{blogId}/posts/{postId}
         [AllowAnonymous]
         [HttpGet("/api/blogs/{blogId}/posts/{postId}")]
         public IActionResult Get(int blogId, int postId)
@@ -71,24 +73,30 @@ namespace CS321_W5D2_BlogAPI.Controllers
             return Ok(_posts.SingleOrDefault(p => p.Id == postId));
         }
 
-        // POST api/values
-        [HttpPost]
-        public IActionResult Post([FromBody]string value)
+        // POST /api/blogs/{blogId}/post
+        [HttpPost("/api/blogs/{blogId}/posts")]
+        public IActionResult Post(int blogId, [FromBody]PostModel postModel)
         {
+            postModel.BlogId = blogId;
+            postModel.Id = _nextId++;
+            postModel.DatePublished = DateTime.Now;
+            _posts.Add(postModel.ToDomainModel());
             return Ok();
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]string value)
+        // PUT /api/blogs/{blogId}/posts/{postId}
+        [HttpPut("/api/blogs/{blogId}/posts/{postId}")]
+        public IActionResult Put(int blogId, int postId, [FromBody]PostModel postModel)
         {
             return Ok();
         }
 
         // DELETE api/values/5
         [HttpDelete("/api/blogs/{blogId}/posts/{postId}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int blogId, int postId)
         {
+            var post = _posts.FirstOrDefault(p => p.BlogId == blogId && p.Id == postId);
+            _posts.Remove(post);
             return Ok();
         }
     }

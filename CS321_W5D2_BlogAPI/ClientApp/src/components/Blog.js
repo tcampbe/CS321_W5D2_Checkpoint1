@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { apiCall } from '../apiUtils';
 import { Card, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import { ApiInfo } from './ApiInfo';
+import { withRouter } from 'react-router-dom'
 
 const PostCard = (props) => {
   const { post, onDeleteClick } = props;
@@ -25,7 +26,7 @@ const PostCard = (props) => {
   );
 };
 
-export class Blog extends Component {
+class Blog extends Component {
   static displayName = Blog.name;
 
   state = {
@@ -63,6 +64,9 @@ export class Blog extends Component {
       this.setState({
         apiInfo: res
       });
+      if (res.status >= 200 && res.status < 400) {
+        this.fetchPosts();
+      }
     })
     .catch(ex => {
       console.log(ex);
@@ -71,9 +75,11 @@ export class Blog extends Component {
 
   render() {
     const { blog, posts, apiInfo } = this.state;
+    const route = this.props.location.pathname;
     return (
       <React.Fragment>
-        <h1>{blog.name}</h1>
+        <h1 style={{ textAlign: 'center'}}>{blog.name}</h1>{'   '}
+        <Button tag={Link} to={route + '/new-post'}>New Post</Button>
         {posts.map((p, i) => (
           <PostCard
             post={p}
@@ -86,3 +92,5 @@ export class Blog extends Component {
     );
   }
 }
+
+export default withRouter(Blog);

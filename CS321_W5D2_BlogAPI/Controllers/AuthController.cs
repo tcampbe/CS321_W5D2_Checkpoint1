@@ -71,7 +71,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
             {
                 // generate and return the token
                 var tokenString = GenerateJSONWebToken(user);
-                response = Ok(new { token = tokenString });
+                response = Ok(new { token = tokenString, email = login.Email });
             }
 
             return response;
