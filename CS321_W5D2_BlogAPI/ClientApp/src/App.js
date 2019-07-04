@@ -9,7 +9,6 @@ import { Post } from './components/Post';
 import { Register } from './components/Register';
 import Login from './components/Login';
 import { apiCall } from './apiUtils';
-import { LoginInfo } from './components/LoginInfo';
 import NewPost from './components/NewPost';
 import TokenHelper from './tokenHelper';
 
