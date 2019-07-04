@@ -40,7 +40,7 @@ export class NavMenu extends Component {
         >
           <Container>
             <NavbarBrand tag={Link} to="/">
-              CS321_W5D2_BlogAPI
+              Checkpoint 2 BlogAPI
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <LoginInfo loggedIn={loggedIn} email={email} />
