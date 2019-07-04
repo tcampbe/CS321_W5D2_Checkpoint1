@@ -4,6 +4,7 @@ import { apiCall } from '../apiUtils';
 import { Card, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 import { ApiInfo } from './ApiInfo';
 import { withRouter } from 'react-router-dom'
+import { BlogHeader } from './BlogHeader';
 
 const PostCard = (props) => {
   const { post, onDeleteClick } = props;
@@ -78,7 +79,7 @@ class Blog extends Component {
     const route = this.props.location.pathname;
     return (
       <React.Fragment>
-        <h1 style={{ textAlign: 'center'}}>{blog.name}</h1>{'   '}
+        <BlogHeader blog={blog}/>
         <Button tag={Link} to={route + '/new-post'}>New Post</Button>
         {posts.map((p, i) => (
           <PostCard

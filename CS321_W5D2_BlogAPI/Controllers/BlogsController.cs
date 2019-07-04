@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CS321_W5D2_BlogAPI.ApiModels;
 using CS321_W5D2_BlogAPI.Core.Models;
 using CS321_W5D2_BlogAPI.Core.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -25,38 +26,39 @@ namespace CS321_W5D2_BlogAPI.Controllers
         // GET: api/values
         [AllowAnonymous]
         [HttpGet]
-        public IEnumerable<Blog> Get()
+        public IActionResult Get()
         {
-            return _blogService.GetAll();
+            return Ok(_blogService.GetAll().ToApiModels());
         }
 
         // GET api/values/5
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public Blog Get(int id)
+        public IActionResult Get(int id)
         {
-            return _blogService.Get(id);
+            return Ok(_blogService.Get(id).ToApiModel());
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]Blog blog)
+        public IActionResult Post([FromBody]Blog blog)
         {
-            _blogService.Add(blog);
+            return Ok(_blogService.Add(blog).ToApiModel());
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Blog blog)
+        public IActionResult Put(int id, [FromBody]Blog blog)
         {
-            _blogService.Update(blog);
+            return Ok(_blogService.Update(blog).ToApiModel());
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             _blogService.Remove(id);
+            return Ok();
         }
     }
 }

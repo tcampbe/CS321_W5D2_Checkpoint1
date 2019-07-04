@@ -4,12 +4,14 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { apiCall } from '../apiUtils';
 import { ApiInfo } from './ApiInfo';
+import { BlogHeader } from './BlogHeader';
 
 class NewPost extends Component {
   static displayName = NewPost.name;
 
   state = {
     apiInfo: {},
+    blog: {},
     postModel: {
       title: 'Lorem Ipsum',
       content:
@@ -17,6 +19,17 @@ class NewPost extends Component {
       commentsAllowed: true,
     },
   };
+
+  componentDidMount() {
+    const { blogId } = this.props.match.params;
+    apiCall(`/api/blogs/${blogId}`, {
+      method: 'GET',
+    }).then((res) => {
+      this.setState({
+        blog: res.data,
+      });
+    });    
+  }
 
   handleClick = () => {
     // const { logIn } = this.props;
@@ -49,10 +62,11 @@ class NewPost extends Component {
   };
 
   render() {
-    const { apiInfo, postModel } = this.state;
+    const { apiInfo, postModel, blog } = this.state;
 
     return (
       <React.Fragment>
+        <BlogHeader blog={blog}/>
         <h3>New Post</h3>
         <Form>
           <FormGroup>
