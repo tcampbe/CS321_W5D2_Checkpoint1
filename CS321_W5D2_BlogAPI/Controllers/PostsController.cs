@@ -25,8 +25,16 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpGet("/api/blogs/{blogId}/posts")]
         public IActionResult Get(int blogId)
         {
-            var posts = _postService.GetBlogPosts(blogId);
-            return Ok(posts.ToApiModels());
+            try
+            {
+                var posts = _postService.GetBlogPosts(blogId);
+                return Ok(posts.ToApiModels());
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetPosts", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         // GET api/blogs/{blogId}/posts/{postId}
@@ -34,8 +42,16 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpGet("/api/blogs/{blogId}/posts/{postId}")]
         public IActionResult Get(int blogId, int postId)
         {
-            var post = _postService.Get(postId);
-            return Ok(post.ToApiModel());
+            try
+            {
+                var post = _postService.Get(postId);
+                return Ok(post.ToApiModel());
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetPost", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         // POST /api/blogs/{blogId}/post
@@ -65,7 +81,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("AddPost", ex.Message);
+                ModelState.AddModelError("UpdatePost", ex.Message);
                 return BadRequest(ModelState);
             }
         }
@@ -81,7 +97,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("AddPost", ex.Message);
+                ModelState.AddModelError("DeletePost", ex.Message);
                 return BadRequest(ModelState);
             }
         }
