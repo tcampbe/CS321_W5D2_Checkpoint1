@@ -19,17 +19,16 @@ export function apiCall(route, options = {}) {
     options: options,
   };
   return fetch(route, options)
-    .then(res => {
+  .then(res => {
       apiInfo.status = res.status;
       apiInfo.statusText = res.statusText;
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-      return res;
+      return res.json();
     })
-    .then((res) => res.json())
     .then((data) => {
       apiInfo.data = data;
+      if (!apiInfo.ok) {
+        throw Error(apiInfo.statusText);
+      }
       return apiInfo;
     })
     .catch(ex => {

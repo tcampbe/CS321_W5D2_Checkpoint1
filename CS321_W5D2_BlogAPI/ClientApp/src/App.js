@@ -74,8 +74,7 @@ class App extends Component {
   render() {
     const { loggedIn, email } = this.state;
     return (
-      <Layout loggedIn={loggedIn} logOut={this.logOut}>
-        <LoginInfo loggedIn={loggedIn} email={email} />
+      <Layout loggedIn={loggedIn} logOut={this.logOut} email={email}>
         <Route
           exact
           path="/"

@@ -42,26 +42,48 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpPost("/api/blogs/{blogId}/posts")]
         public IActionResult Post(int blogId, [FromBody]PostModel postModel)
         {
-            postModel.BlogId = blogId;
-            postModel.DatePublished = DateTime.Now;
-            var newPost = _postService.Add(postModel.ToDomainModel());
-            return Ok(newPost);
+            try
+            {
+                var newPost = _postService.Add(postModel.ToDomainModel());
+                return Ok(newPost);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("AddPost", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         // PUT /api/blogs/{blogId}/posts/{postId}
         [HttpPut("/api/blogs/{blogId}/posts/{postId}")]
         public IActionResult Put(int blogId, int postId, [FromBody]PostModel postModel)
         {
-            var updatedPost = _postService.Update(postModel.ToDomainModel());
-            return Ok(updatedPost);
+            try
+            {
+                var updatedPost = _postService.Update(postModel.ToDomainModel());
+                return Ok(updatedPost);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("AddPost", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         // DELETE api/values/5
         [HttpDelete("/api/blogs/{blogId}/posts/{postId}")]
         public IActionResult Delete(int blogId, int postId)
         {
-            _postService.Remove(postId);
-            return Ok();
+            try
+            {
+                _postService.Remove(postId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("AddPost", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
     }
 }

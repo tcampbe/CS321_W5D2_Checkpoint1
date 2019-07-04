@@ -33,7 +33,6 @@ class NewPost extends Component {
       },
       body: JSON.stringify(postModel),
     }).then((res) => {
-      console.log(res);
       this.setState({
         apiInfo: res,
       });

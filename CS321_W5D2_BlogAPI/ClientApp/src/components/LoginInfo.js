@@ -6,10 +6,8 @@ export class LoginInfo extends Component {
   render() {
     const { loggedIn, email } = this.props;
     return (
-      <div>
-        <h3 className="text-primary" style={{ textAlign: 'center' }}>
+      <div className="text-primary" style={{ textAlign: 'center', width: '60%' }}>
           {loggedIn ? 'Logged in as ' + email : 'You are not logged in.'}
-        </h3>
       </div>
     );
   }

@@ -35,6 +35,7 @@ namespace CS321_W5D2_BlogAPI
                 configuration.RootPath = "ClientApp/build";
             });
 
+            services.AddHttpContextAccessor();
             services.AddDbContext<AppDbContext>();
 
             // Add Identity services
@@ -59,6 +60,7 @@ namespace CS321_W5D2_BlogAPI
                 };
             });
 
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IBlogService, BlogService>();

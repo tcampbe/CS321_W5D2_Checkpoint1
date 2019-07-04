@@ -11,5 +11,11 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {
 
         }
+
+        public bool DoesBlogBelongToUser(int blogId, string userId)
+        {
+            var blog = this.Get(blogId);
+            return blog.UserId == userId;
+        }
     }
 }

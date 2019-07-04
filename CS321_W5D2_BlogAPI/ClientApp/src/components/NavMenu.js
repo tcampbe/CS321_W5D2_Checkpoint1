@@ -10,6 +10,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
+import { LoginInfo } from './LoginInfo';
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -30,7 +31,7 @@ export class NavMenu extends Component {
   }
 
   render() {
-    const { loggedIn, logOut } = this.props;
+    const { loggedIn, logOut, email } = this.props;
     return (
       <header>
         <Navbar
@@ -42,6 +43,7 @@ export class NavMenu extends Component {
               CS321_W5D2_BlogAPI
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+            <LoginInfo loggedIn={loggedIn} email={email} />
             <Collapse
               className="d-sm-inline-flex flex-sm-row-reverse"
               isOpen={!this.state.collapsed}
@@ -55,7 +57,12 @@ export class NavMenu extends Component {
                 </NavItem>
                 {loggedIn ? (
                   <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/login" onClick={logOut}>
+                    <NavLink
+                      tag={Link}
+                      className="text-dark"
+                      to="/login"
+                      onClick={logOut}
+                    >
                       Log Out
                     </NavLink>
                   </NavItem>
