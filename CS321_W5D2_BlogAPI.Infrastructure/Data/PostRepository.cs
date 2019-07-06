@@ -13,6 +13,7 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {  
         }
 
+        // TODO: Implement Get(id). Include related Blog and AppUser
         public override Post Get(int id)
         {
             return _dbContext.Posts
@@ -21,6 +22,8 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
                 .SingleOrDefault(p => p.Id == id);
         }
 
+        // TODO: Implement GetBlogPosts, return all posts for given blog
+        // TODO: Include related Blog and AppUser
         public IEnumerable<Post> GetBlogPosts(int blogId)
         {
             return _dbContext.Posts
@@ -30,6 +33,7 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
                 .ToList();
         }
 
+        // TODO: Implement GetPostComments, return all Comments for given Post
         public IEnumerable<Comment> GetPostComments(int postId)
         {
             return _dbContext.Comments

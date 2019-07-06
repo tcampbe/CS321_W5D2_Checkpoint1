@@ -18,6 +18,7 @@ namespace CS321_W5D2_BlogAPI.ApiModels
 				CommentsAllowed = post.CommentsAllowed,
                 BlogId = post.BlogId,
                 DatePublished = post.DatePublished,
+                // TODO: map blogName and authorName
                 BlogName = post.Blog?.Name,
                 AuthorName = post.Blog?.User?.FullName
 			};

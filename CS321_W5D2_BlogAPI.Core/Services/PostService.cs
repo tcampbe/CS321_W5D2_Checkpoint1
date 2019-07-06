@@ -10,6 +10,7 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         private readonly IBlogRepository _blogRepository;
         private readonly IUserService _userService;
 
+        // TODO: inject IPostRepository, IBlogRepository, and IUserService
         public PostService(IPostRepository postRepository, IBlogRepository blogRepository, IUserService userService)
         {
             _postRepository = postRepository;
@@ -19,7 +20,9 @@ namespace CS321_W5D2_BlogAPI.Core.Services
 
         public Post Add(Post newPost)
         {
+            // TODO: Prevent users from adding to a blog that isn't theirs
             EnsureBlogBelongsToUser(newPost.BlogId);
+            // TODO: assign the current date to DatePublished
             newPost.DatePublished = DateTime.Now;
             return _postRepository.Add(newPost);
         }
@@ -42,12 +45,14 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         public void Remove(int id)
         {
             var post = this.Get(id);
+            // TODO: prevent user from deleting from a blog that isn't theirs
             EnsureBlogBelongsToUser(post.BlogId);
             _postRepository.Remove(id);
         }
 
         public Post Update(Post updatedPost)
         {
+            // TODO: prevent user from updating a blog that isn't theirs
             EnsureBlogBelongsToUser(updatedPost.BlogId);
             return _postRepository.Update(updatedPost);
         }
