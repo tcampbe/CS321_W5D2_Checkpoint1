@@ -14,14 +14,6 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            //builder.Entity<Blog>().HasData();
-
-            //builder.Entity<ActivityType>().HasData(
-            //    new ActivityType { Id = 1, Name = "Running", RecordType = RecordType.DurationAndDistance },
-            //    new ActivityType { Id = 2, Name = "Weights", RecordType = RecordType.DurationOnly },
-            //    new ActivityType { Id = 3, Name = "Walking", RecordType = RecordType.DurationAndDistance }
-            //);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

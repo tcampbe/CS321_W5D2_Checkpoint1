@@ -65,11 +65,12 @@ namespace CS321_W5D2_BlogAPI
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IBlogService, BlogService>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<DbInitializer, DbInitializer>();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -104,6 +105,8 @@ namespace CS321_W5D2_BlogAPI
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+            dbInitializer.Initialize();
         }
     }
 }

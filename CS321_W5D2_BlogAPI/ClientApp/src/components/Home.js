@@ -10,6 +10,7 @@ const BlogCard = (props) => {
     <Card>
       <CardBody>
         <CardTitle>{blog.name}</CardTitle>
+        <CardText style={{ fontStyle: 'italic', fontSize: '8' }}>A blog by {blog.authorName}</CardText>
         <CardText>{blog.description}</CardText>
         <Button tag={Link} to={`/blog/${blog.id}`}>Read Now!</Button>
       </CardBody>

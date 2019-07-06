@@ -36,5 +36,12 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
                 .Where(c => c.PostId == postId)
                 .ToList();
         }
+
+        public Comment AddComment(Comment comment)
+        {
+            _dbContext.Comments.Add(comment);
+            _dbContext.SaveChanges();
+            return comment;
+        }
     }
 }

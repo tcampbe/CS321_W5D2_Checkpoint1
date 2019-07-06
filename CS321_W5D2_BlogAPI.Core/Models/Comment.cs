@@ -9,5 +9,7 @@ namespace CS321_W5D2_BlogAPI.Core.Models
         public DateTime DatePublished { get; set; }
         public int PostId { get; set; }
         public Post Post { get; set; }
+        public int UserId { get; set; }
+        public AppUser User { get; set; }
     }
 }
