@@ -8,6 +8,7 @@ using CS321_W5D2_BlogAPI.Core.Services;
 
 namespace CS321_W5D2_BlogAPI.Controllers
 {
+    // TODO: secure controller actions that change data
     [Authorize]
     [Route("api/[controller]")]
     public class PostsController : Controller
@@ -20,6 +21,8 @@ namespace CS321_W5D2_BlogAPI.Controllers
             _postService = postService;
         }
 
+        // TODO: get posts for blog
+        // TODO: allow anyone to get, even if not logged in
         // GET /api/blogs/{blogId}/posts
         [AllowAnonymous]
         [HttpGet("/api/blogs/{blogId}/posts")]
@@ -38,6 +41,8 @@ namespace CS321_W5D2_BlogAPI.Controllers
             }
         }
 
+        // TODO: get post by id
+        // TODO: allow anyone to get, even if not logged in
         // GET api/blogs/{blogId}/posts/{postId}
         [AllowAnonymous]
         [HttpGet("/api/blogs/{blogId}/posts/{postId}")]
@@ -56,6 +61,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
             }
         }
 
+        // TODO: add a new post to blog
         // POST /api/blogs/{blogId}/post
         [HttpPost("/api/blogs/{blogId}/posts")]
         public IActionResult Post(int blogId, [FromBody]PostModel postModel)
@@ -77,7 +83,6 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpPut("/api/blogs/{blogId}/posts/{postId}")]
         public IActionResult Put(int blogId, int postId, [FromBody]PostModel postModel)
         {
-            // TODO: handle exceptions and return BadRequest if one occurs
             try
             {
                 var updatedPost = _postService.Update(postModel.ToDomainModel());
@@ -90,7 +95,8 @@ namespace CS321_W5D2_BlogAPI.Controllers
             }
         }
 
-        // DELETE api/values/5
+        // TODO: delete post by id
+        // DELETE /api/blogs/{blogId}/posts/{postId}
         [HttpDelete("/api/blogs/{blogId}/posts/{postId}")]
         public IActionResult Delete(int blogId, int postId)
         {

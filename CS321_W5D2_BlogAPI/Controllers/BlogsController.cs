@@ -23,7 +23,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
             _blogService = blogService;
         }
 
-        // GET: api/values
+        // GET: api/bogs
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
@@ -31,7 +31,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
             return Ok(_blogService.GetAll().ToApiModels());
         }
 
-        // GET api/values/5
+        // GET api/blogs/{id}
         [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -39,21 +39,21 @@ namespace CS321_W5D2_BlogAPI.Controllers
             return Ok(_blogService.Get(id).ToApiModel());
         }
 
-        // POST api/values
+        // POST api/blogs
         [HttpPost]
         public IActionResult Post([FromBody]Blog blog)
         {
             return Ok(_blogService.Add(blog).ToApiModel());
         }
 
-        // PUT api/values/5
+        // PUT api/blogs/{id}
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Blog blog)
         {
             return Ok(_blogService.Update(blog).ToApiModel());
         }
 
-        // DELETE api/values/5
+        // DELETE api/blogs/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
