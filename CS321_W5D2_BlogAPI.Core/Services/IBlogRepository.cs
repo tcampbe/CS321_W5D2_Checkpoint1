@@ -11,6 +11,5 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         Blog Get(int id);
         IEnumerable<Blog> GetAll();
         void Remove(int id);
-        bool DoesBlogBelongToUser(int blogId, string userId);
     }
 }

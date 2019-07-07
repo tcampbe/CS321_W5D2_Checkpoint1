@@ -7,27 +7,41 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CS321_W5D2_BlogAPI.Infrastructure.Data
 {
-    public class BlogRepository : Repository<Blog, int>, IBlogRepository
+    public class BlogRepository : IBlogRepository
     {
-        public BlogRepository(AppDbContext dbContext) : base(dbContext)
+        public BlogRepository(AppDbContext dbContext) 
         {
 
         }
 
-        public override IEnumerable<Blog> GetAll()
+        public IEnumerable<Blog> GetAll()
         {
-            return _dbContext.Blogs.Include(b => b.User).ToList();
+            // TODO: Retrieve all blgs. Include Blog.User.
+            throw new NotImplementedException();
         }
 
-        public override Blog Get(int id)
+        public Blog Get(int id)
         {
-            return _dbContext.Blogs.Include(b => b.User).SingleOrDefault(b => b.Id == id);
+            // TODO: Retrieve the blog by id. Include Blog.User.
+            throw new NotImplementedException();
         }
 
-        public bool DoesBlogBelongToUser(int blogId, string userId)
+        public Blog Add(Blog blog)
         {
-            var blog = this.Get(blogId);
-            return blog.UserId == userId;
+            // TODO: Add new blog
+            throw new NotImplementedException();
+        }
+
+        public Blog Update(Blog blog)
+        {
+            // TODO: update blog
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int id)
+        {
+            // TODO: remove blog
+            throw new NotImplementedException();
         }
     }
 }
