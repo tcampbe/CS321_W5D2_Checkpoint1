@@ -9,9 +9,11 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
 {
     public class BlogRepository : IBlogRepository
     {
+        private readonly AppDbContext _dbContext;
+
         public BlogRepository(AppDbContext dbContext) 
         {
-
+            // TODO: inject AppDbContext
         }
 
         public IEnumerable<Blog> GetAll()
@@ -32,10 +34,18 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
             throw new NotImplementedException();
         }
 
-        public Blog Update(Blog blog)
+        public Blog Update(Blog updatedItem)
         {
             // TODO: update blog
             throw new NotImplementedException();
+            //var existingItem = _dbContext.Find(updatedItem.Id);
+            //if (existingItem == null) return null;
+            //_dbContext.Entry(existingItem)
+            //   .CurrentValues
+            //   .SetValues(updatedItem);
+            //_dbContext.Blogs.Update(existingItem);
+            //_dbContext.SaveChanges();
+            //return existingItem;
         }
 
         public void Remove(int id)

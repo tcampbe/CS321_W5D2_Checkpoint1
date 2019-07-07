@@ -28,17 +28,25 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            // TODO: replace the code below with the correct implementation
-            // to return all blogs
-            return Ok(new BlogModel[] {
-                new BlogModel
-                {
-                    Id = 1,
-                    Name = "Fix Me!",
-                    Description = "Implement GET /api/blogs",
-                    AuthorName = "unknown",
-                }
-            });
+            try
+            {
+                // TODO: replace the code below with the correct implementation
+                // to return all blogs
+                return Ok(new BlogModel[] {
+                    new BlogModel
+                    {
+                        Id = 1,
+                        Name = "Fix Me!",
+                        Description = "Implement GET /api/blogs",
+                        AuthorName = "unknown",
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetBlog", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         // GET api/blogs/{id}
@@ -46,37 +54,69 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            // TODO: replace the code below with the correct implementation
-            // to return a blog by id
-            return Ok(new BlogModel
+            try
             {
-                Id = id,
-                Name = "Fix Me!",
-                Description = "Implement GET /api/blogs/{id}",
-                AuthorName = "unknown",
-            });
+                // TODO: replace the code below with the correct implementation
+                // to return a blog by id
+                return Ok(new BlogModel
+                {
+                    Id = id,
+                    Name = "Fix Me!",
+                    Description = "Implement GET /api/blogs/{id}",
+                    AuthorName = "unknown",
+                });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetBlogs", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         // POST api/blogs
         [HttpPost]
         public IActionResult Post([FromBody]Blog blog)
         {
-            return Ok(_blogService.Add(blog).ToApiModel());
+            try
+            {
+                return Ok(_blogService.Add(blog).ToApiModel());
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("AddBlog", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         // PUT api/blogs/{id}
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Blog blog)
         {
-            return Ok(_blogService.Update(blog).ToApiModel());
+            try
+            {
+                return Ok(_blogService.Update(blog).ToApiModel());
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("UpdateBlog", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         // DELETE api/blogs/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _blogService.Remove(id);
-            return Ok();
+            try
+            {
+                _blogService.Remove(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("DeleteBlog", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
     }
 }

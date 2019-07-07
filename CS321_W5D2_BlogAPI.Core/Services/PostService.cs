@@ -10,7 +10,6 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         private readonly IBlogRepository _blogRepository;
         private readonly IUserService _userService;
 
-        // TODO: inject IPostRepository, IBlogRepository, and IUserService
         public PostService(IPostRepository postRepository, IBlogRepository blogRepository, IUserService userService)
         {
             _postRepository = postRepository;
@@ -21,6 +20,8 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         public Post Add(Post newPost)
         {
             // TODO: Prevent users from adding to a blog that isn't theirs
+            //     Use the _userService to get the current users id.
+            //     You may have to retrieve the blog in order to check user id
             // TODO: assign the current date to DatePublished
             return _postRepository.Add(newPost);
         }
