@@ -63,7 +63,6 @@ class App extends Component {
   componentDidMount() {
     //const blogToken = localStorage.getItem('blogToken');
     const blogToken = TokenHelper.getToken();
-    console.log(blogToken);
     this.setState({
       loggedIn: !!blogToken,
       email: blogToken ? blogToken.email : null
