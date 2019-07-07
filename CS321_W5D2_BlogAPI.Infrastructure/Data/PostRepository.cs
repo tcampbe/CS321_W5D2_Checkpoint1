@@ -7,45 +7,48 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CS321_W5D2_BlogAPI.Infrastructure.Data
 {
-    public class PostRepository : Repository<Post, int>, IPostRepository
+    public class PostRepository : IPostRepository
     {
-        public PostRepository(AppDbContext dbContext) : base(dbContext)
+        public PostRepository(AppDbContext dbContext) 
         {  
         }
 
-        // TODO: Implement Get(id). Include related Blog and AppUser
-        public override Post Get(int id)
+        public Post Get(int id)
         {
-            return _dbContext.Posts
-                .Include(p => p.Blog)
-                .ThenInclude(b => b.User)
-                .SingleOrDefault(p => p.Id == id);
+            // TODO: Implement Get(id). Include related Blog and Blog.User
+            throw new NotImplementedException();
         }
 
-        // TODO: Implement GetBlogPosts, return all posts for given blog
-        // TODO: Include related Blog and AppUser
         public IEnumerable<Post> GetBlogPosts(int blogId)
         {
-            return _dbContext.Posts
-                .Include(p => p.Blog)
-                .ThenInclude(b => b.User)
-                .Where(p => p.BlogId == blogId)
-                .ToList();
+            // TODO: Implement GetBlogPosts, return all posts for given blog id
+            // TODO: Include related Blog and AppUser
+            throw new NotImplementedException();
         }
 
-        // TODO: Implement GetPostComments, return all Comments for given Post
-        public IEnumerable<Comment> GetPostComments(int postId)
+        public Post Add(Post Post)
         {
-            return _dbContext.Comments
-                .Where(c => c.PostId == postId)
-                .ToList();
+            // TODO: add Post
+            throw new NotImplementedException();
         }
 
-        public Comment AddComment(Comment comment)
+        public Post Update(Post Post)
         {
-            _dbContext.Comments.Add(comment);
-            _dbContext.SaveChanges();
-            return comment;
+            // TODO: update Post
+            throw new NotImplementedException();
         }
+
+        public IEnumerable<Post> GetAll()
+        {
+            // TODO: get all posts
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int id)
+        {
+            // TODO: remove Post
+            throw new NotImplementedException();
+        }
+
     }
 }

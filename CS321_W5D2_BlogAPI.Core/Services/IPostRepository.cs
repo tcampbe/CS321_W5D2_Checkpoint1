@@ -12,7 +12,5 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         IEnumerable<Post> GetAll();
         void Remove(int id);
         IEnumerable<Post> GetBlogPosts(int blogId);
-        IEnumerable<Comment> GetPostComments(int postId);
-        Comment AddComment(Comment comment);
     }
 }
