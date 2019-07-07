@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+﻿import React, { Component } from 'react';
 import { Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
 const ApiInfoCard = ({ apiInfo }) => (
@@ -38,7 +38,7 @@ export class ApiInfo extends Component {
     const { apiInfo } = this.props;
     return (
       <React.Fragment>
-        {apiInfo.route ? <ApiInfoCard apiInfo={apiInfo} /> : null};
+        {apiInfo.route ? <ApiInfoCard apiInfo={apiInfo} /> : null}
       </React.Fragment>
     );
   }
