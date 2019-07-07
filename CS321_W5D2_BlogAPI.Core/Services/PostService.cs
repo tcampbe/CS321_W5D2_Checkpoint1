@@ -21,9 +21,7 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         public Post Add(Post newPost)
         {
             // TODO: Prevent users from adding to a blog that isn't theirs
-            EnsureBlogBelongsToUser(newPost.BlogId);
             // TODO: assign the current date to DatePublished
-            newPost.DatePublished = DateTime.Now;
             return _postRepository.Add(newPost);
         }
 
@@ -46,23 +44,14 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         {
             var post = this.Get(id);
             // TODO: prevent user from deleting from a blog that isn't theirs
-            EnsureBlogBelongsToUser(post.BlogId);
             _postRepository.Remove(id);
         }
 
         public Post Update(Post updatedPost)
         {
             // TODO: prevent user from updating a blog that isn't theirs
-            EnsureBlogBelongsToUser(updatedPost.BlogId);
             return _postRepository.Update(updatedPost);
         }
 
-        private void EnsureBlogBelongsToUser(int blogId)
-        {
-            if (!_blogRepository.DoesBlogBelongToUser(blogId, _userService.CurrentUserId))
-            {
-                throw new ApplicationException("You can only modify blogs that belong to you.");
-            }
-        }
     }
 }

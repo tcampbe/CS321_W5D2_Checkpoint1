@@ -23,11 +23,13 @@ namespace CS321_W5D2_BlogAPI.Controllers
         {
         }
 
-        // GET: api/bogs
+        // GET: api/blogs
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {
+            // TODO: replace the code below with the correct implementation
+            // to return all blogs
             return Ok(new BlogModel[] {
                 new BlogModel
                 {
@@ -44,6 +46,8 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            // TODO: replace the code below with the correct implementation
+            // to return a blog by id
             return Ok(new BlogModel
             {
                 Id = id,
