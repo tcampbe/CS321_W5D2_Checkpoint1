@@ -28,7 +28,15 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_blogService.GetAll().ToApiModels());
+            return Ok(new BlogModel[] {
+                new BlogModel
+                {
+                    Id = 1,
+                    Name = "Fix Me!",
+                    Description = "Implement GET /api/blogs",
+                    AuthorName = "unknown",
+                }
+            });
         }
 
         // GET api/blogs/{id}
@@ -36,7 +44,13 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(_blogService.Get(id).ToApiModel());
+            return Ok(new BlogModel
+            {
+                Id = id,
+                Name = "Fix Me!",
+                Description = "Implement GET /api/blogs/{id}",
+                AuthorName = "unknown",
+            });
         }
 
         // POST api/blogs

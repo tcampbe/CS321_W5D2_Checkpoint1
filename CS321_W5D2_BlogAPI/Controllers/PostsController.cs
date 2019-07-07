@@ -9,7 +9,6 @@ using CS321_W5D2_BlogAPI.Core.Services;
 namespace CS321_W5D2_BlogAPI.Controllers
 {
     // TODO: secure controller actions that change data
-    [Authorize]
     [Route("api/[controller]")]
     public class PostsController : Controller
     {
@@ -24,41 +23,43 @@ namespace CS321_W5D2_BlogAPI.Controllers
         // TODO: get posts for blog
         // TODO: allow anyone to get, even if not logged in
         // GET /api/blogs/{blogId}/posts
-        [AllowAnonymous]
         [HttpGet("/api/blogs/{blogId}/posts")]
         public IActionResult Get(int blogId)
         {
-            // TODO: handle exceptions and return BadRequest if one occurs
-            try
-            {
-                var posts = _postService.GetBlogPosts(blogId);
-                return Ok(posts.ToApiModels());
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("GetPosts", ex.Message);
-                return BadRequest(ModelState);
-            }
+            // TODO: replace the code below with the correct implementation
+            return Ok(new PostModel[] {
+                new PostModel
+                {
+                    Id = 1,
+                    BlogId = 1,
+                    BlogName = "Fix Me!",
+                    Title = "Fix Me!",
+                    Content = "Implement GET /api/blogs/{blogId}/posts",
+                    AuthorName = "unknown",
+                    DatePublished = DateTime.Now
+                }
+            });
         }
 
         // TODO: get post by id
         // TODO: allow anyone to get, even if not logged in
         // GET api/blogs/{blogId}/posts/{postId}
-        [AllowAnonymous]
         [HttpGet("/api/blogs/{blogId}/posts/{postId}")]
         public IActionResult Get(int blogId, int postId)
         {
-            // TODO: handle exceptions and return BadRequest if one occurs
-            try
-            {
-                var post = _postService.Get(postId);
-                return Ok(post.ToApiModel());
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("GetPost", ex.Message);
-                return BadRequest(ModelState);
-            }
+            // TODO: replace the code below with the correct implementation
+            return Ok(
+                new PostModel
+                {
+                    Id = 1,
+                    BlogId = 1,
+                    BlogName = "Fix Me!",
+                    Title = "Fix Me!",
+                    Content = "Implement GET /api/blogs/{blogId}/posts",
+                    AuthorName = "unknown",
+                    DatePublished = DateTime.Now
+                }
+            );
         }
 
         // TODO: add a new post to blog
@@ -66,17 +67,9 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpPost("/api/blogs/{blogId}/posts")]
         public IActionResult Post(int blogId, [FromBody]PostModel postModel)
         {
-            // TODO: handle exceptions and return BadRequest if one occurs
-            try
-            {
-                var newPost = _postService.Add(postModel.ToDomainModel());
-                return Ok(newPost);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("AddPost", ex.Message);
-                return BadRequest(ModelState);
-            }
+            // TODO: replace the code below with the correct implementation
+            ModelState.AddModelError("AddPost", "Fix Me! Implement POST /api/blogs{blogId}/posts");
+            return BadRequest(ModelState);
         }
 
         // PUT /api/blogs/{blogId}/posts/{postId}
@@ -100,17 +93,9 @@ namespace CS321_W5D2_BlogAPI.Controllers
         [HttpDelete("/api/blogs/{blogId}/posts/{postId}")]
         public IActionResult Delete(int blogId, int postId)
         {
-            // TODO: handle exceptions and return BadRequest if one occurs
-            try
-            {
-                _postService.Remove(postId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("DeletePost", ex.Message);
-                return BadRequest(ModelState);
-            }
+            // TODO: replace the code below with the correct implementation
+            ModelState.AddModelError("DeletePost", "Fix Me! Implement DELETE /api/blogs{blogId}/posts/{postId}");
+            return BadRequest(ModelState);
         }
     }
 }
