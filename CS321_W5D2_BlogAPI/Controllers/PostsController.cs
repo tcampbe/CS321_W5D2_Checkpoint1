@@ -15,9 +15,9 @@ namespace CS321_W5D2_BlogAPI.Controllers
 
         private readonly IPostService _postService;
 
-        public PostsController(IPostService postService)
+        // TODO: inject PostService
+        public PostsController()
         {
-            _postService = postService;
         }
 
         // TODO: get posts for blog
