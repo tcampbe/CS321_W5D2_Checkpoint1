@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using CS321_W5D2_BlogAPI.Core.Models;
 using CS321_W5D2_BlogAPI.Core.Services;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -38,7 +40,17 @@ namespace CS321_W5D2_BlogAPI
             services.AddHttpContextAccessor();
 
             // TODO: add your DbContext
-            services.AddDbContext<AppDbContext>();
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("AzureDb"),
+                    sqlOptions =>
+                    {
+                        sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 10,
+                        maxRetryDelay: TimeSpan.FromSeconds(5),
+                        errorNumbersToAdd: null);
+                    });
+            });
 
             // TODO: add identity services
             // Add Identity services

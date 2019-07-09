@@ -14,6 +14,7 @@ namespace CS321_W5D2_BlogAPI
     {
         public static void Main(string[] args)
         {
+
             CreateWebHostBuilder(args).Build().Run();
         }
 
