@@ -22,8 +22,18 @@ namespace CS321_W5D2_BlogAPI.Core.Services
             // TODO: Prevent users from adding to a blog that isn't theirs
             //     Use the _userService to get the current users id.
             //     You may have to retrieve the blog in order to check user id
-            // TODO: assign the current date to DatePublished
-            return _postRepository.Add(newPost);
+            var currentUserId = _userService.CurrentUserId;
+            var blog = _blogRepository.Get(newPost.BlogId);
+            if (currentUserId == blog.UserId)
+            {
+                // TODO: assign the current date to DatePublished
+                newPost.DatePublished = DateTime.Now;
+                return _postRepository.Add(newPost);
+            }
+            else
+            {
+                throw new ApplicationException("Posts must be to your blog.")
+            }
         }
 
         public Post Get(int id)
@@ -45,14 +55,31 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         {
             var post = this.Get(id);
             // TODO: prevent user from deleting from a blog that isn't theirs
-            _postRepository.Remove(id);
+            var currentId = _userService.CurrentUserId;
+            var blog = _blogRepository.Get(post.BlogId);
+            if (currentId==blog.UserId)
+            {
+                _postRepository.Remove(id);
+            }
+            else
+            {
+                throw new Exception("Only remove your post.");
+            }
         }
 
         public Post Update(Post updatedPost)
         {
             // TODO: prevent user from updating a blog that isn't theirs
-            return _postRepository.Update(updatedPost);
+            var currentId = _userService.CurrentUserId;
+            var blog = _blogRepository.Get(updatedPost.BlogId);
+            if (currentId == blog.UserId)
+            {
+               return _postRepository.Update(updatedPost);
+            }
+            else
+            {
+                throw new Exception("Only update your post.");
+            }
         }
-
     }
 }
