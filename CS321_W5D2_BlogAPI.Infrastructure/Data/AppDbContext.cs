@@ -21,7 +21,7 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {
             // TODO: use Sqlite db
 
-            optionsBuilder.UseSqlite("DataSource = blog.db");
+            optionsBuilder.UseSqlite("DataSource=../CS321_W5D2_BlogAPI.Infrastructure/blog.db");
         }
     }
 }

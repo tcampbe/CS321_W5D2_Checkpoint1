@@ -32,7 +32,7 @@ namespace CS321_W5D2_BlogAPI.Core.Services
             }
             else
             {
-                throw new ApplicationException("Posts must be to your blog.")
+                throw new ApplicationException("Posts must be to your blog.");
             }
         }
 
